@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BluJanky</string>
+    <string name="app_introduction"> Welcome! Click on the button below to search </string>
+</resources>
