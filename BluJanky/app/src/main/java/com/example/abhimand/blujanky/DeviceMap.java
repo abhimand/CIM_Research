@@ -2,7 +2,9 @@ package com.example.abhimand.blujanky;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.IntentFilter;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.abhimand.blujanky.*;
 
@@ -16,23 +18,23 @@ public class DeviceMap {
 
 
     public void tryAddDevice(BluetoothDevice dev, ArrayList string_AL, ArrayAdapter <String> array_AdapterName, ArrayAdapter <String> array_AdapterAddress) {
-        if (dev.getName() == null) {
-            System.out.println("There is currently no name for this device");
-            if(dev.getAddress() != null) {
-                System.out.println("However, there is an address for this device");
-            }
-        }
         if (bt_DeviceMap.containsKey(dev.getAddress()) || bt_DeviceMap.containsValue(dev.getName())) {
             System.out.println("This device is already on the list");
         } else {
-            string_AL.add(dev.getName());
-            bt_DeviceMap.put(dev.getAddress(), dev.getName());
-            if (dev.getName() == null) {
+            if(dev.getName() == null) {
+                System.out.println("There is currently no name for this device");
+            }else {
+                string_AL.add(dev.getName());
                 array_AdapterName.notifyDataSetChanged();
+            }if (dev.getAddress() != null) {
+                    string_AL.add(dev.getAddress());
+                    array_AdapterAddress.notifyDataSetChanged();
+                    bt_DeviceMap.put(dev.getAddress(), dev.getName());
             }
-            array_AdapterAddress.notifyDataSetChanged();
         }
     }
+
+
 
 
  }

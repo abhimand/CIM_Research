@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     Intent bt_Enable_Intent;
     int req_Enable;
+    int i;                                                                                          //counter
 
 
     @Override
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
          * ****************************************************************************************/
         IntentFilter intent_Filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(myReceiver, intent_Filter);
+
         array_AdapterName = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_list_item_1,string_AL);
         scan_ListName.setAdapter(array_AdapterName);
