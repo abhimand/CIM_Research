@@ -27,11 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
     Button button_On, button_Off, button_Discoverable, button_Scan, button_Get;
     ListView scan_ListName;
-    ArrayList <String> string_AL = new ArrayList<String>();
-    ArrayAdapter <String> array_AdapterName;
-    ArrayAdapter <String> array_AdapterAddress;
+    ArrayList<String> string_AL = new ArrayList<String>();
+    ArrayAdapter<String> array_AdapterName;
+    ArrayAdapter<String> array_AdapterAddress;
     BluetoothAdapter bt_Adapter;
-
 
 
     Intent bt_Enable_Intent;
@@ -53,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         bt_Adapter = BluetoothAdapter.getDefaultAdapter();
 
 
-
         bt_Enable_Intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         req_Enable = 1;
 
@@ -64,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         bt_Scan_Method();
         bt_getName_Method();
 
+        bt_listName_Method();
+
         /* *****************************************************************************************
          *                              DISCOVER DEVICES PORTION
          * ****************************************************************************************/
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(myReceiver, intent_Filter);
 
         array_AdapterName = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_list_item_1,string_AL);
+                android.R.layout.simple_list_item_1, string_AL);
         scan_ListName.setAdapter(array_AdapterName);
 
         array_AdapterAddress = new ArrayAdapter<String>(getApplicationContext(),                    //inclusion of bluetooth device address
@@ -86,27 +86,28 @@ public class MainActivity extends AppCompatActivity {
      *
      * ********************************************************************************************/
 
-    private void bt_On_Method () {
+    private void bt_On_Method() {
         button_On.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(bt_Adapter == null) {                                                            // check if bluetooth is supported
+                if (bt_Adapter == null) {                                                            // check if bluetooth is supported
                     Toast.makeText(getApplicationContext(),                                         // if it is not, print toast
                             "Bluetooth does not support on ths device",
                             Toast.LENGTH_LONG).show();
-                } else if (!bt_Adapter.isEnabled())  {                                                                             // otherwise// check if adapter is turned on
+                } else if (!bt_Adapter.isEnabled()) {                                                                             // otherwise// check if adapter is turned on
                     startActivityForResult(bt_Enable_Intent, req_Enable);                       // if not, turn on
-                    Toast.makeText(getApplicationContext(),"Bluetooth is now enabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Bluetooth is now enabled", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
     }
+
     private void bt_Off_Method() {
         button_Off.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v) {
-                if(bt_Adapter.isEnabled()) {                                                        // check if it is enabled
+            public void onClick(View v) {
+                if (bt_Adapter.isEnabled()) {                                                        // check if it is enabled
                     Toast.makeText(getApplicationContext(),
                             "Bluetooth is now disabled",
                             Toast.LENGTH_LONG).show();
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == req_Enable) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(),
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_Discoverable = new Intent                                             // compared to just simply turning on the device
                         (BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                 intent_Discoverable.putExtra
-                        (BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,30);                     // value in this case is the amount of seconds discoverabliity is on
+                        (BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 30);                     // value in this case is the amount of seconds discoverabliity is on
                 startActivity(intent_Discoverable);
             }
         });
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     private void bt_Scan_Method() {
         button_Scan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v) {
+            public void onClick(View v) {
                 bt_Adapter.startDiscovery();
             }
         });
@@ -174,9 +175,7 @@ public class MainActivity extends AppCompatActivity {
             DeviceMap dev_Map = new DeviceMap();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice dev = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                dev_Map.tryAddDevice(dev,string_AL, array_AdapterName, array_AdapterAddress);
-
-
+                dev_Map.tryAddDevice(dev, string_AL, array_AdapterName, array_AdapterAddress);        //class method
 
 
                 //if(dev.getName() == null) {                                                         //checks if name is null
@@ -215,15 +214,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "localdevicename:" + bt_Adapter.getName()
-                                + " localdeviceAddress: " + bt_Adapter.getAddress()
+                                + " localdeviceAddress: " + bt_Adapter.getName()
                         , Toast.LENGTH_LONG).show();
 
                 bt_Adapter.setName("Foo");
 
                 Toast.makeText(MainActivity.this, "localdevicename:" + bt_Adapter.getName()
-                                + " localdeviceAddress: " + bt_Adapter.getAddress()
+                                + " localdeviceAddress: " + bt_Adapter.getName()
                         , Toast.LENGTH_LONG).show();
             }
         });
     }
+
+
+    /* *********************************************************************************************
+     *
+     *
+     *                                  BLUETOOTH LIST NAME METHOD---------in progress
+     *
+     *
+     * ********************************************************************************************/
+
+    public void bt_listName_Method() {
+        scan_ListName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //create intent
+                Intent intentNew  = new Intent(this, Main2Activity.class);
+
+                //start activity
+                startActivity(intentNew);
+            }
+        });
+    }
+
 }
+
+
+
