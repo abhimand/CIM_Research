@@ -1,3 +1,9 @@
+/* In this section, I wanted to save the device's name and address so that a user can later on
+ * revise the name and address locally by using a hashmap to store address and key as key and value,
+ * respectively
+ */
+
+
 package com.example.abhimand.blujanky;
 
 import android.bluetooth.BluetoothAdapter;
@@ -14,10 +20,12 @@ import java.util.HashMap;
 
 public class DeviceMap {
 
-    HashMap<String, String> bt_DeviceMap = new HashMap <String, String>();                          //key = address, value = name
+    HashMap<String, String> bt_DeviceMap = new HashMap <String, String>();                                       //key = address, value = name
 
 
-    public void tryAddDevice(BluetoothDevice dev, ArrayList string_AL, ArrayAdapter <String> array_AdapterName, ArrayAdapter <String> array_AdapterAddress) {
+    public void tryAddDevice(BluetoothDevice dev, ArrayList string_AL,
+                             ArrayAdapter <String> array_AdapterName,
+                             ArrayAdapter <String> array_AdapterAddress) {
         if (bt_DeviceMap.containsKey(dev.getAddress()) || bt_DeviceMap.containsValue(dev.getName())) {
             System.out.println("This device is already on the list");
         } else {
@@ -34,6 +42,4 @@ public class DeviceMap {
         }
     }
 
-
-
- }
+}

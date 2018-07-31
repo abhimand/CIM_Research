@@ -20,6 +20,7 @@
         android:background="@color/colorPrimary"
         android:text="OFF"
         android:textColor="@color/colorPrimaryText"
+
         app:layout_constraintBottom_toTopOf="@+id/scan_list"
         app:layout_constraintEnd_toStartOf="@+id/button_get"
         app:layout_constraintHorizontal_bias="0.0"
@@ -109,7 +110,7 @@
 
     <ListView
         android:id="@+id/scan_list"
-        android:layout_width="332dp"
+        android:layout_width="307dp"
         android:layout_height="303dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
@@ -118,12 +119,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
-        android:text="@color/colorPrimaryDark"
+        android:text="@color/colorPrimaryText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.776" />
+        app:layout_constraintVertical_bias="0.873" />
 
 </android.support.constraint.ConstraintLayout>

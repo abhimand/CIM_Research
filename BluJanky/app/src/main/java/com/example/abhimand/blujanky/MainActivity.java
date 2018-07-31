@@ -90,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
         button_On.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bt_Adapter == null) {                                                            // check if bluetooth is supported
+                if (bt_Adapter == null) {                                                           // check if bluetooth is supported
                     Toast.makeText(getApplicationContext(),                                         // if it is not, print toast
                             "Bluetooth does not support on ths device",
                             Toast.LENGTH_LONG).show();
                 } else if (!bt_Adapter.isEnabled()) {                                                                             // otherwise// check if adapter is turned on
-                    startActivityForResult(bt_Enable_Intent, req_Enable);                       // if not, turn on
+                    startActivityForResult(bt_Enable_Intent, req_Enable);                           // if not, turn on
                     Toast.makeText(getApplicationContext(), "Bluetooth is now enabled", Toast.LENGTH_LONG).show();
                 }
 
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         button_Off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bt_Adapter.isEnabled()) {                                                        // check if it is enabled
+                if (bt_Adapter.isEnabled()) {                                                       // check if it is enabled
                     Toast.makeText(getApplicationContext(),
                             "Bluetooth is now disabled",
                             Toast.LENGTH_LONG).show();
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_Discoverable = new Intent                                             // compared to just simply turning on the device
                         (BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                 intent_Discoverable.putExtra
-                        (BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 30);                     // value in this case is the amount of seconds discoverabliity is on
+                        (BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 30);                    // value in this case is the amount of seconds discoverabliity is on
                 startActivity(intent_Discoverable);
             }
         });
@@ -175,15 +175,17 @@ public class MainActivity extends AppCompatActivity {
             DeviceMap dev_Map = new DeviceMap();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice dev = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                dev_Map.tryAddDevice(dev, string_AL, array_AdapterName, array_AdapterAddress);        //class method
+                dev_Map.tryAddDevice(dev, string_AL, array_AdapterName, array_AdapterAddress);      //class method
 
 
-                //if(dev.getName() == null) {                                                         //checks if name is null
+
+                //THIS PORTION OF CODE WAS USED TO TEST
+                //if(dev.getName() == null) {                                                       //checks if name is null
                 //    System.out.println("There is currently no name available for this device");
                 //    System.out.println("The address is: " + dev.getAddress());
-                //} else {                                                                            // check if appeared once before, see if array list has contains method
+                //} else {                                                                          // check if appeared once before, see if array list has contains method
                 //    if (!(string_AL.contains(dev.getName()) || string_AL.contains(dev.getAddress()))) {
-                //        string_AL.add(dev.getName());                                                   // use map to have the name and address of the device, manipulate
+                //        string_AL.add(dev.getName());                                             // use map to have the name and address of the device, manipulate
                 //        array_AdapterName.notifyDataSetChanged();
                 //    }
                 //}
@@ -206,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
      *
      *
      *                                  BLUETOOTH GET/SET NAME---------in progress
+     *
      *
      * ********************************************************************************************/
 
@@ -232,8 +235,12 @@ public class MainActivity extends AppCompatActivity {
      *
      *                                  BLUETOOTH LIST NAME METHOD---------in progress
      *
+     *                                  Why is startActivity not working?
+     *
      *
      * ********************************************************************************************/
+
+
 
     public void bt_listName_Method() {
         scan_ListName.setOnClickListener(new View.OnClickListener() {
@@ -241,10 +248,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //create intent
-                Intent intentNew  = new Intent(this, Main2Activity.class);
-
-                //start activity
-                startActivity(intentNew);
+                Intent intent = new Intent(this, Main2Activity.class);                              //<----------------------------------- why is this not working?
+                //start activity                                                                    //what is the problem here? need to revise later and read up on some tutorials
+                startActivity(intent);
             }
         });
     }
