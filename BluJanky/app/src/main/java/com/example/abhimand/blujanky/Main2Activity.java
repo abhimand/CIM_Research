@@ -7,11 +7,14 @@
 
 package com.example.abhimand.blujanky;
 
+import android.bluetooth.BluetoothAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.abhimand.blujanky.DeviceMap;
 import com.example.abhimand.blujanky.R;
@@ -22,6 +25,8 @@ public class Main2Activity extends AppCompatActivity {
     TextView textAddress;
     EditText textEditName;
     EditText textEditAddress;
+    Button button_Rename;
+    BluetoothAdapter bt2_Adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,8 @@ public class Main2Activity extends AppCompatActivity {
         textAddress = (TextView) findViewById(R.id.textViewAddress);
         textEditName = (EditText) findViewById(R.id.editTextName);
         textEditAddress = (EditText) findViewById(R.id.editTextAddress);
+        button_Rename = (Button) findViewById(R.id.button_rename);
+        bt2_Adapter = BluetoothAdapter.getDefaultAdapter();
 
         renameLocals();
 
@@ -41,10 +48,25 @@ public class Main2Activity extends AppCompatActivity {
         textEditAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeviceMap.bt_DeviceMap(textEditAddress.getText().toString(),                        // LEFT OFF HERE
-                        textEditName.getText().toString());                                         // How can I make this work?
+                DeviceMap dm = new DeviceMap();
+                dm.renameLocal(textEditAddress, textEditName);
+            }
+        });
+    }
 
+    private void bt_getName_Method() {
+        button_Rename.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Main2Activity.this, "localdevicename:" + bt2_Adapter.getName()
+                                + " localdeviceAddress: " + bt2_Adapter.getName()
+                        , Toast.LENGTH_LONG).show();
 
+                bt2_Adapter.setName("Foo");
+
+                Toast.makeText(Main2Activity.this, "localdevicename:" + bt2_Adapter.getName()
+                                + " localdeviceAddress: " + bt2_Adapter.getName()
+                        , Toast.LENGTH_LONG).show();
             }
         });
     }

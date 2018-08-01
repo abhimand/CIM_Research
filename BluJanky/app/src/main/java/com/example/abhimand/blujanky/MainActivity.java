@@ -21,11 +21,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button button_On, button_Off, button_Discoverable, button_Scan, button_Get;
+    Button button_On, button_Off, button_Discoverable, button_Scan, button_Rename;
     ListView scan_ListName;
     ArrayList<String> string_AL = new ArrayList<String>();
     ArrayAdapter<String> array_AdapterName;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         button_Off = (Button) findViewById(R.id.button_off);
         button_Discoverable = (Button) findViewById(R.id.button_discoverable);
         button_Scan = (Button) findViewById(R.id.button_scan);
-        button_Get = (Button) findViewById(R.id.button_get);
+        button_Rename = (Button) findViewById(R.id.button_rename);
         scan_ListName = (ListView) findViewById(R.id.scan_list);
         bt_Adapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -60,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
         bt_Off_Method();
         bt_Discoverable_Method();
         bt_Scan_Method();
-        bt_getName_Method();
-
         bt_listName_Method();
 
         /* *****************************************************************************************
@@ -177,57 +174,10 @@ public class MainActivity extends AppCompatActivity {
                 BluetoothDevice dev = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 dev_Map.tryAddDevice(dev, string_AL, array_AdapterName, array_AdapterAddress);      //class method
 
-
-
-                //THIS PORTION OF CODE WAS USED TO TEST
-                //if(dev.getName() == null) {                                                       //checks if name is null
-                //    System.out.println("There is currently no name available for this device");
-                //    System.out.println("The address is: " + dev.getAddress());
-                //} else {                                                                          // check if appeared once before, see if array list has contains method
-                //    if (!(string_AL.contains(dev.getName()) || string_AL.contains(dev.getAddress()))) {
-                //        string_AL.add(dev.getName());                                             // use map to have the name and address of the device, manipulate
-                //        array_AdapterName.notifyDataSetChanged();
-                //    }
-                //}
             }
 
-
-
-            /*
-             * To link and edit our names in secondary activity,
-             * Create and intent to start the secondary activity
-             * so Intent intent = new Intent(this.SecondActivity.class);
-             *
-             * To Start the new Activity, startActivity (randomIntent);
-             */
         }
     };
-
-
-    /* *********************************************************************************************
-     *
-     *
-     *                                  BLUETOOTH GET/SET NAME---------in progress
-     *
-     *
-     * ********************************************************************************************/
-
-    private void bt_getName_Method() {
-        button_Get.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "localdevicename:" + bt_Adapter.getName()
-                                + " localdeviceAddress: " + bt_Adapter.getName()
-                        , Toast.LENGTH_LONG).show();
-
-                bt_Adapter.setName("Foo");
-
-                Toast.makeText(MainActivity.this, "localdevicename:" + bt_Adapter.getName()
-                                + " localdeviceAddress: " + bt_Adapter.getName()
-                        , Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
 
     /* *********************************************************************************************
@@ -240,17 +190,15 @@ public class MainActivity extends AppCompatActivity {
      *
      * ********************************************************************************************/
 
-
-
     public void bt_listName_Method() {
         scan_ListName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //create intent
-                Intent intent = new Intent(this, Main2Activity.class);                              //<----------------------------------- why is this not working?
+                Intent intentNew = new Intent(this, Main2Activity.class);                              //<----------------------------------- why is this not working?
                 //start activity                                                                    //what is the problem here? need to revise later and read up on some tutorials
-                startActivity(intent);
+                startActivity(intentNew);
             }
         });
     }

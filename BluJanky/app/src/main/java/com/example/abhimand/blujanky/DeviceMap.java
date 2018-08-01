@@ -10,6 +10,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.IntentFilter;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.abhimand.blujanky.*;
@@ -41,5 +42,11 @@ public class DeviceMap {
             }
         }
     }
+
+    public void renameLocal(EditText address, EditText name) {
+        bt_DeviceMap.put(address.getText().toString(), name.getText().toString());
+    }
+
+
 
 }

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="56dp"
         android:background="@color/colorPrimary"
         android:text="Name"
         android:textColor="@color/colorPrimaryText"
@@ -44,7 +44,7 @@
         android:id="@+id/editTextAddress"
         android:layout_width="206dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="300dp"
+        android:layout_marginBottom="292dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="16dp"
@@ -56,6 +56,7 @@
         android:textColor="@color/colorPrimaryText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.681"
         app:layout_constraintStart_toEndOf="@+id/textViewAddress" />
 
     <TextView
@@ -73,4 +74,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewName"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_rename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/colorPrimary"
+        android:text="Rename"
+        android:textColor="@color/colorPrimaryText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.896" />
 </android.support.constraint.ConstraintLayout>
