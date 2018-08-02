@@ -1,3 +1,4 @@
 # CIM_Research
 
-****Currently in Progess****
+***Currently in Progess***
+***Going Private***
