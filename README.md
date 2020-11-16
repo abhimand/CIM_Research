@@ -13,12 +13,6 @@ Child independent mobility (CIM) refers to the freedom of children to move about
 * **Abhishek E. Mandal** 
 * **Dr. Christine Julien**
 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
 ## More Info 
 
 * http://mpc.ece.utexas.edu/
